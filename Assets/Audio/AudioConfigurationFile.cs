@@ -3,91 +3,188 @@ using UnityEditor;
 
 public class AudioConfigruationFile : ScriptableObject
 {
+    static private uint clipSampleRateSetting = 44100;
+    static private AudioCompressionFormat clipCompressionFormatSetting = AudioCompressionFormat.Vorbis;
+    static private AudioClipLoadType clipLoadTypeSetting = AudioClipLoadType.DecompressOnLoad;
+    static private string platformOverrideSetting = "Standalone";
 
-    [MenuItem("Custom/Sound/Toggle audio compression/AAC")]
+    [MenuItem("Manual Audio Controls/Set Sample Rate Setting/8,000 Hz")]
+    static void ToggleSampleRate_8000()
+    {
+        clipSampleRateSetting = 8000;
+    }
+
+    [MenuItem("Manual Audio Controls/Set Sample Rate Setting/11,025 Hz")]
+    static void ToggleSampleRate_11025()
+    {
+        clipSampleRateSetting = 11025;
+    }
+
+    [MenuItem("Manual Audio Controls/Set Sample Rate Setting/22,050 Hz")]
+    static void ToggleSampleRate_22050()
+    {
+        clipSampleRateSetting = 22050;
+    }
+    
+    [MenuItem("Manual Audio Controls/Set Sample Rate Setting/44,100 Hz")]
+    static void ToggleSampleRate_44100()
+    {
+        clipSampleRateSetting = 44100;
+    }
+
+    [MenuItem("Manual Audio Controls/Set Sample Rate Setting/48,000 Hz")]
+    static void ToggleSampleRate_48000()
+    {
+        clipSampleRateSetting = 48000;
+    }
+
+    [MenuItem("Manual Audio Controls/Set Sample Rate Setting/96,000 Hz")]
+    static void ToggleSampleRate_96000()
+    {
+        clipSampleRateSetting = 96000;
+    }
+
+    [MenuItem("Manual Audio Controls/Set Sample Rate Setting/192,000 Hz")]
+    static void ToggleSampleRate_192000()
+    {
+        clipSampleRateSetting = 192000;
+    }
+
+    // ----------------------------------------------------------------------------
+
+    [MenuItem("Manual Audio Controls/Set Audio Compression Setting/AAC")]
     static void ToggleCompression_AAC()
     {
-        SelectedToggleCompressionSettings(AudioCompressionFormat.AAC);
+        clipCompressionFormatSetting = AudioCompressionFormat.AAC;
     }
 
-    [MenuItem("Custom/Sound/Toggle audio compression/ADPCM")]
+    [MenuItem("Manual Audio Controls/Set Audio Compression Setting/ADPCM")]
     static void ToggleCompression_ADPCM()
     {
-        SelectedToggleCompressionSettings(AudioCompressionFormat.ADPCM);
+        clipCompressionFormatSetting = AudioCompressionFormat.ADPCM;
     }
 
-    [MenuItem("Custom/Sound/Toggle audio compression/ATRAC9")]
+    [MenuItem("Manual Audio Controls/Set Audio Compression Setting/ATRAC9")]
     static void ToggleCompression_ATRAC9()
     {
-        SelectedToggleCompressionSettings(AudioCompressionFormat.ATRAC9);
+        clipCompressionFormatSetting = AudioCompressionFormat.ATRAC9;
     }
 
-    [MenuItem("Custom/Sound/Toggle audio compression/GCADPCM")]
+    [MenuItem("Manual Audio Controls/Set Audio Compression Setting/GCADPCM")]
     static void ToggleCompression_GCADPCM()
     {
-        SelectedToggleCompressionSettings(AudioCompressionFormat.GCADPCM);
+        clipCompressionFormatSetting = AudioCompressionFormat.GCADPCM;
     }
 
-    [MenuItem("Custom/Sound/Toggle audio compression/HEVAG")]
+    [MenuItem("Manual Audio Controls/Set Audio Compression Setting/HEVAG")]
     static void ToggleCompression_HEVAG()
     {
-        SelectedToggleCompressionSettings(AudioCompressionFormat.HEVAG);
+        clipCompressionFormatSetting = AudioCompressionFormat.HEVAG;
     }
 
-    [MenuItem("Custom/Sound/Toggle audio compression/MP3")]
+    [MenuItem("Manual Audio Controls/Set Audio Compression Setting/MP3")]
     static void ToggleCompression_MP3()
     {
-        SelectedToggleCompressionSettings(AudioCompressionFormat.MP3);
+        clipCompressionFormatSetting = AudioCompressionFormat.MP3;
     }
 
-    [MenuItem("Custom/Sound/Toggle audio compression/PCM")]
+    [MenuItem("Manual Audio Controls/Set Audio Compression Setting/PCM")]
     static void ToggleCompression_PCM()
     {
-        SelectedToggleCompressionSettings(AudioCompressionFormat.PCM);
+        clipCompressionFormatSetting = AudioCompressionFormat.PCM;
     }
 
-    [MenuItem("Custom/Sound/Toggle audio compression/VAG")]
+    [MenuItem("Manual Audio Controls/Set Audio Compression Setting/VAG")]
     static void ToggleCompression_VAG()
     {
-        SelectedToggleCompressionSettings(AudioCompressionFormat.VAG);
+        clipCompressionFormatSetting = AudioCompressionFormat.PCM;
     }
 
-    [MenuItem("Custom/Sound/Toggle audio compression/Vorbis")]
+    [MenuItem("Manual Audio Controls/Set Audio Compression Setting/Vorbis")]
     static void ToggleCompression_Vorbis()
     {
-        SelectedToggleCompressionSettings(AudioCompressionFormat.Vorbis);
+        clipCompressionFormatSetting = AudioCompressionFormat.Vorbis;
     }
 
-    [MenuItem("Custom/Sound/Toggle audio compression/XMA")]
+    [MenuItem("Manual Audio Controls/Set Audio Compression Setting/XMA")]
     static void ToggleCompression_XMA()
     {
-        SelectedToggleCompressionSettings(AudioCompressionFormat.XMA);
+        clipCompressionFormatSetting = AudioCompressionFormat.XMA;
     }
     // ----------------------------------------------------------------------------
 
-    [MenuItem("Custom/Sound/load type/Stream from disc")]
-    static void ToggleDecompressOnLoad_Disable()
+    [MenuItem("Manual Audio Controls/Set Load Type Setting/Streaming")]
+    static void ToggleDecompressOnLoad_Streaming()
     {
-        SelectedToggleDecompressOnLoadSettings(AudioClipLoadType.Streaming);
+        clipLoadTypeSetting = AudioClipLoadType.Streaming;
     }
 
-    [MenuItem("Custom/Sound/load type/Decompress on Load")]
-    static void ToggleDecompressOnLoad_Enable()
+    [MenuItem("Manual Audio Controls/Set Load Type Setting/Decompress on Load")]
+    static void ToggleDecompressOnLoad_Decompressed()
     {
-        SelectedToggleDecompressOnLoadSettings(AudioClipLoadType.DecompressOnLoad);
+        clipLoadTypeSetting = AudioClipLoadType.DecompressOnLoad;
     }
 
-    [MenuItem("Custom/Sound/load type/CompressedInMemory")]
-    static void ToggleDecompressOnLoad_Enable2()
+    [MenuItem("Manual Audio Controls/Set Load Type Setting/CompressedInMemory")]
+    static void ToggleDecompressOnLoad_Compressed()
     {
-        SelectedToggleDecompressOnLoadSettings(AudioClipLoadType.CompressedInMemory);
+        clipLoadTypeSetting = AudioClipLoadType.CompressedInMemory;
     }
 
     // ----------------------------------------------------------------------------
 
-    static void SelectedToggleCompressionSettings(AudioCompressionFormat newFormat)
+    [MenuItem("Manual Audio Controls/Set Platform Override Setting/Standalone")]
+    static void TogglePlatformOverride_Standalone()
     {
+        platformOverrideSetting = "Standalone";
+    }
 
+    [MenuItem("Manual Audio Controls/Set Platform Override Setting/Android")]
+    static void TogglePlatformOverride_Android()
+    {
+        platformOverrideSetting = "Android";
+    }
+
+    [MenuItem("Manual Audio Controls/Set Platform Override Setting/WebPlayer")]
+    static void TogglePlatformOverride_WebPlayer()
+    {
+        platformOverrideSetting = "WebPlayer";
+    }
+
+    [MenuItem("Manual Audio Controls/Set Platform Override Setting/iOS")]
+    static void TogglePlatformOverride_iOS()
+    {
+        platformOverrideSetting = "iOS";
+    }
+
+    [MenuItem("Manual Audio Controls/Set Platform Override Setting/WebGL")]
+    static void TogglePlatformOverride_WebGL()
+    {
+        platformOverrideSetting = "WegGL";
+    }
+
+    [MenuItem("Manual Audio Controls/Set Platform Override Setting/PS4")]
+    static void TogglePlatformOverride_PS4()
+    {
+        platformOverrideSetting = "PS4";
+    }
+
+    [MenuItem("Manual Audio Controls/Set Platform Override Setting/Xbox One")]
+    static void TogglePlatformOverride_XBoxOne()
+    {
+        platformOverrideSetting = "XboxOne";
+    }
+
+    // ----------------------------------------------------------------------------
+
+    [MenuItem("Manual Audio Controls/Apply Selected Settings")]
+    static void ToggleApplySettings()
+    {
+        ApplySettings(clipSampleRateSetting, clipCompressionFormatSetting, clipLoadTypeSetting, platformOverrideSetting);
+    }
+
+    static void ApplySettings(uint sampleRate, AudioCompressionFormat format, AudioClipLoadType loadType, string platform)
+    {
         Object[] audioclips = GetSelectedAudioclips();
         Selection.objects = new Object[0];
         foreach (AudioClip audioclip in audioclips)
@@ -95,28 +192,16 @@ public class AudioConfigruationFile : ScriptableObject
             string path = AssetDatabase.GetAssetPath(audioclip);
             AudioImporter audioImporter = AssetImporter.GetAtPath(path) as AudioImporter;
             AudioImporterSampleSettings settings = audioImporter.defaultSampleSettings;
-            settings.compressionFormat = newFormat;
-            audioImporter.SetOverrideSampleSettings("Standalone", settings);
-            AssetDatabase.ImportAsset(path);
-        }
-    }
-
-    static void SelectedToggleDecompressOnLoadSettings(AudioClipLoadType loadType)
-    {
-
-        Object[] audioclips = GetSelectedAudioclips();
-        Selection.objects = new Object[0];
-        foreach (AudioClip audioclip in audioclips)
-        {
-            string path = AssetDatabase.GetAssetPath(audioclip);
-            AudioImporter audioImporter = AssetImporter.GetAtPath(path) as AudioImporter;
-            AudioImporterSampleSettings settings = audioImporter.defaultSampleSettings;
+            settings.compressionFormat = format;
+            settings.sampleRateSetting = AudioSampleRateSetting.OverrideSampleRate;
+            settings.sampleRateOverride = sampleRate;
             settings.loadType = loadType;
-            audioImporter.SetOverrideSampleSettings("Standalone", settings);
+            audioImporter.SetOverrideSampleSettings(platform, settings);
             AssetDatabase.ImportAsset(path);
         }
     }
 
+    //Method which searches and adds all audioclips to an array of objects, including searching all child folders for audio clips.
     static Object[] GetSelectedAudioclips()
     {
         return Selection.GetFiltered(typeof(AudioClip), SelectionMode.DeepAssets);
