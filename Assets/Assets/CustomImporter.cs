@@ -3,11 +3,15 @@ using UnityEditor;
 
 public class AudioConfigruationFile : ScriptableObject
 {
+    // Audio Settings Variables to store the changed settings
+    // Defaults are set to not cause errors upon first use of the tool
     public static uint clipSampleRateSetting { get; set; } = 44100;
     public static AudioCompressionFormat clipCompressionFormatSetting { get; set; } = AudioCompressionFormat.Vorbis;
     public static AudioClipLoadType clipLoadTypeSetting { get; set; } = AudioClipLoadType.DecompressOnLoad;
     public static string platformOverrideSetting { get; set; } = "Standalone";
 
+    // Below are Menu Controls for sample rate settings, made into static toggles that can be triggered.
+    // Adding a menu item is simple as copying and pasting one and changing the menu item variable, method name and the settings value.
     [MenuItem("Manual Audio Controls/Set Sample Rate Setting/8,000 Hz")]
     static void ToggleSampleRate_8000()
     {
@@ -51,6 +55,8 @@ public class AudioConfigruationFile : ScriptableObject
     }
 
     // ----------------------------------------------------------------------------
+    // Below are Menu Controls for audio compression settings, made into static toggles that can be triggered.
+    // Adding a menu item is simple as copying and pasting one and changing the menu item variable, method name and the settings value.
 
     [MenuItem("Manual Audio Controls/Set Audio Compression Setting/AAC")]
     static void ToggleCompression_AAC()
@@ -112,6 +118,8 @@ public class AudioConfigruationFile : ScriptableObject
         clipCompressionFormatSetting = AudioCompressionFormat.XMA;
     }
     // ----------------------------------------------------------------------------
+    // Below are Menu Controls for load type settings, made into static toggles that can be triggered.
+    // Adding a menu item is simple as copying and pasting one and changing the menu item variable, method name and the settings value.
 
     [MenuItem("Manual Audio Controls/Set Load Type Setting/Streaming")]
     static void ToggleDecompressOnLoad_Streaming()
@@ -132,6 +140,8 @@ public class AudioConfigruationFile : ScriptableObject
     }
 
     // ----------------------------------------------------------------------------
+    // Below are Menu Controls for platform override settings, made into static toggles that can be triggered.
+    // Adding a menu item is simple as copying and pasting one and changing the menu item variable, method name and the settings value.
 
     [MenuItem("Manual Audio Controls/Set Platform Override Setting/Standalone")]
     static void TogglePlatformOverride_Standalone()
@@ -176,13 +186,16 @@ public class AudioConfigruationFile : ScriptableObject
     }
 
     // ----------------------------------------------------------------------------
-
+    // Below can be found Apply Settings. This toggle takes all the settings and runs it through a method that will apply all the chosen settings manually
+    // to all clip files found in the file structure. This method only has 4 inputs, 1 for each of the 4 settings and is easily expandable to add more if needed.
     [MenuItem("Manual Audio Controls/Apply Selected Settings")]
     static public void ToggleApplySettings()
     {
         ApplySettings(clipSampleRateSetting, clipCompressionFormatSetting, clipLoadTypeSetting, platformOverrideSetting);
     }
 
+    // Apply settings Method which searches and adds all audio clips in an array, and for each clip, adds the settings, overrides it for the selected platform
+    // and imports the newly applied asset again, therefore applying all the settings properly.
     static void ApplySettings(uint sampleRate, AudioCompressionFormat format, AudioClipLoadType loadType, string platform)
     {
         Object[] audioclips = GetSelectedAudioclips();
@@ -201,7 +214,8 @@ public class AudioConfigruationFile : ScriptableObject
         }
     }
 
-    //Method which searches and adds all audioclips to an array of objects, including searching all child folders for audio clips.
+    // Method which searches and adds all audioclips to an array of objects, including searching all child folders for audio clips.
+    // Users must be inside a folder with an audio clip for the search to start working properly.
     static Object[] GetSelectedAudioclips()
     {
         return Selection.GetFiltered(typeof(AudioClip), SelectionMode.DeepAssets);
@@ -210,9 +224,16 @@ public class AudioConfigruationFile : ScriptableObject
 
 public class TextureConfigurationFile : ScriptableObject
 {
+    // Texture Settings Variables to store the changed Settings.
+    // Defaults are set as to not cause errors upon first use of tool.
     public static int textureMaxSizeSetting { get; set; } = 2048;
     public static int textureAnisoLevel { get; set; } = 1;
     public static string platformOverrideSetting { get; set; } = "Standalone";
+    public static TextureCompressionQuality textureCompressionQuality { get; set; } = TextureCompressionQuality.Normal;
+    public static bool textureAlphaSplittingSetting = false;
+
+    // Below are Menu Controls for texture size settings, made into static toggles that can be triggered.
+    // Adding a menu item is simple as copying and pasting one and changing the menu item variable, method name and the settings value.
 
     [MenuItem("Manual Texture Controls/Set Texture Size Setting/32px")]
     static void ToggleTextureSize_32()
@@ -269,6 +290,8 @@ public class TextureConfigurationFile : ScriptableObject
     }
 
     // ----------------------------------------------------------------------------
+    // Below are Menu Controls for texture aniso level settings, made into static toggles that can be triggered.
+    // Adding a menu item is simple as copying and pasting one and changing the menu item variable, method name and the settings value.
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 1")]
     static void ToggleTextureAnisoLevel_1()
@@ -367,6 +390,46 @@ public class TextureConfigurationFile : ScriptableObject
     }
 
     // ----------------------------------------------------------------------------
+    // Below are Menu Controls for texture compression quality, made into static toggles that can be triggered.
+    // Adding a menu item is simple as copying and pasting one and changing the menu item variable, method name and the settings value.
+
+    [MenuItem("Manual Texture Controls/Set Texture Compression Quality/Normal")]
+    static void ToggleCompressionQuality_Normal()
+    {
+        textureCompressionQuality = TextureCompressionQuality.Normal;
+    }
+
+    [MenuItem("Manual Texture Controls/Set Texture Compression Quality/Best")]
+    static void ToggleCompressionQuality_Best()
+    {
+        textureCompressionQuality = TextureCompressionQuality.Best;
+    }
+
+    [MenuItem("Manual Texture Controls/Set Texture Compression Quality/Fast")]
+    static void ToggleCompressionQuality_Fast()
+    {
+        textureCompressionQuality = TextureCompressionQuality.Fast;
+    }
+
+    // ----------------------------------------------------------------------------
+    // Below are Menu Controls for texture alpha splitting, made into static toggles that can be triggered.
+    // Adding a menu item is simple as copying and pasting one and changing the menu item variable, method name and the settings value.
+
+    [MenuItem("Manual Texture Controls/Set Alpha Splitting/Disable")]
+    static void ToggleAlphaSplitting_Disable()
+    {
+        textureAlphaSplittingSetting = false;
+    }
+
+    [MenuItem("Manual Texture Controls/Set Alpha Splitting/Enable")]
+    static void ToggleAlphaSplitting_Enable()
+    {
+        textureAlphaSplittingSetting = true;
+    }
+
+    // ----------------------------------------------------------------------------
+    // Below are Menu Controls for platform override settings, made into static toggles that can be triggered.
+    // Adding a menu item is simple as copying and pasting one and changing the menu item variable, method name and the settings value.
 
     [MenuItem("Manual Texture Controls/Set Platform Override Setting/Standalone")]
     static void TogglePlatformOverride_Standalone()
@@ -389,7 +452,13 @@ public class TextureConfigurationFile : ScriptableObject
     [MenuItem("Manual Texture Controls/Set Platform Override Setting/iOS")]
     static void TogglePlatformOverride_iOS()
     {
-        platformOverrideSetting = "iOS";
+        platformOverrideSetting = "iPhone";
+    }
+
+    [MenuItem("Manual Texture Controls/Set Platform Override Setting/tvOS")]
+    static void TogglePlatformOverride_tvOS()
+    {
+        platformOverrideSetting = "tvOS";
     }
 
     [MenuItem("Manual Texture Controls/Set Platform Override Setting/Web GL")]
@@ -398,10 +467,34 @@ public class TextureConfigurationFile : ScriptableObject
         platformOverrideSetting = "WegGL";
     }
 
+    [MenuItem("Manual Texture Controls/Set Platform Override Setting/Web")]
+    static void TogglePlatformOverride_Web()
+    {
+        platformOverrideSetting = "Web";
+    }
+
+    [MenuItem("Manual Texture Controls/Set Platform Override Setting/Windows Store Apps")]
+    static void TogglePlatformOverride_WindowsStoreApps()
+    {
+        platformOverrideSetting = "Windows Store Apps";
+    }
+
+    [MenuItem("Manual Texture Controls/Set Platform Override Setting/Nintendo 3DS")]
+    static void TogglePlatformOverride_Nintendo3DS()
+    {
+        platformOverrideSetting = "Nintendo 3DS";
+    }
+
     [MenuItem("Manual Texture Controls/Set Platform Override Setting/PS4")]
     static void TogglePlatformOverride_PS4()
     {
         platformOverrideSetting = "PS4";
+    }
+
+    [MenuItem("Manual Texture Controls/Set Platform Override Setting/PSM")]
+    static void TogglePlatformOverride_PSM()
+    {
+        platformOverrideSetting = "PSM";
     }
 
     [MenuItem("Manual Texture Controls/Set Platform Override Setting/Xbox One")]
@@ -411,6 +504,8 @@ public class TextureConfigurationFile : ScriptableObject
     }
 
     // ----------------------------------------------------------------------------
+    // Below can be found Apply Settings. This toggle takes all the settings and runs it through a method that will apply all the chosen settings manually
+    // to all texture files found in the file structure. This method only has 3 inputs, 1 for each of the 3 settings and is easily expandable to add more if needed.
 
     [MenuItem("Manual Texture Controls/Apply Selected Settings")]
     static public void ToggleApplySettings()
@@ -418,6 +513,8 @@ public class TextureConfigurationFile : ScriptableObject
         ApplySettings(textureMaxSizeSetting, textureAnisoLevel, platformOverrideSetting);
     }
 
+    // Apply settings Method which searches and adds all texture files in an array, and for each file, adds the settings, overrides it for the selected platform
+    // and imports the newly applied asset again, therefore applying all the settings properly.
     static void ApplySettings(int maxSize, int anisoLevel,string platform)
     {
         Object[] textures = GetSelectedTextures();
@@ -437,6 +534,7 @@ public class TextureConfigurationFile : ScriptableObject
     }
 
     //Method which searches and adds all textures to an array of objects, including searching all child folders for textures.
+    // Users must be inside a folder with a texture file for the search to start working properly.
     static Object[] GetSelectedTextures()
     {
         return Selection.GetFiltered(typeof(Texture), SelectionMode.DeepAssets);
@@ -446,7 +544,6 @@ public class TextureConfigurationFile : ScriptableObject
 //Class for handling Automatic importing for Audio and Textures
 public class AutomaticImport : AssetPostprocessor
 {   
-
     //Method that automatically runs when a new audio file is added to the Unity Project. Will always run when a new Audio File is added to the process.
    void OnPreprocessAudio()
     {
@@ -468,11 +565,11 @@ public class AutomaticImport : AssetPostprocessor
 
     void OnPreprocessTexture()
     {
-        //First checks if the asset is going into any folder labeled "Audio", otherwise it will not run the rest of the code at all.
+        //First checks if the asset is going into any folder labeled "Textures", otherwise it will not run the rest of the code at all.
         if (assetPath.Contains("Textures"))
         {
-            //Settings are obtained from the Audio Configuration Class to allow for easy access to the already selected choices.
-            //Audio importer must save and Reimport for the changes to take effect, otherwise the changes will not apply to the file.
+            //Settings are obtained from the Texture Configuration class to allow for easy access to the already selected choices.
+            //Texture Importer must save and Reimport for the changes to take effect, otherwise the changes will not apply to the file.
             TextureImporter textureImporter = (TextureImporter)assetImporter;
             TextureImporterPlatformSettings texturesettings = textureImporter.GetDefaultPlatformTextureSettings();
             texturesettings.maxTextureSize = TextureConfigurationFile.textureMaxSizeSetting;
