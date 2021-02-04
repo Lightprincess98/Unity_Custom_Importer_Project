@@ -227,10 +227,10 @@ public class TextureConfigurationFile : ScriptableObject
     // Texture Settings Variables to store the changed Settings.
     // Defaults are set as to not cause errors upon first use of tool.
     public static int textureMaxSizeSetting { get; set; } = 2048;
-    public static int textureAnisoLevel { get; set; } = 1;
+    public static int textureAnisoLevelSetting { get; set; } = 1;
     public static string platformOverrideSetting { get; set; } = "Standalone";
-    public static TextureCompressionQuality textureCompressionQuality { get; set; } = TextureCompressionQuality.Normal;
     public static bool textureAlphaSplittingSetting = false;
+    public static TextureImporterCompression textureCompressionTypeSetting { get; set; } = TextureImporterCompression.Uncompressed;
 
     // Below are Menu Controls for texture size settings, made into static toggles that can be triggered.
     // Adding a menu item is simple as copying and pasting one and changing the menu item variable, method name and the settings value.
@@ -296,119 +296,97 @@ public class TextureConfigurationFile : ScriptableObject
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 1")]
     static void ToggleTextureAnisoLevel_1()
     {
-        textureAnisoLevel = 1;
+        textureAnisoLevelSetting = 1;
     }
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level ")]
     static void ToggleTextureAnisoLevel_2()
     {
-        textureAnisoLevel = 2;
+        textureAnisoLevelSetting = 2;
     }
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 3")]
     static void ToggleTextureAnisoLevel_3()
     {
-        textureAnisoLevel = 3;
+        textureAnisoLevelSetting = 3;
     }
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 4")]
     static void ToggleTextureAnisoLevel_4()
     {
-        textureAnisoLevel = 4;
+        textureAnisoLevelSetting = 4;
     }
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 5")]
     static void ToggleTextureAnisoLevel_5()
     {
-        textureAnisoLevel = 5;
+        textureAnisoLevelSetting = 5;
     }
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 6")]
     static void ToggleTextureAnisoLevel_6()
     {
-        textureAnisoLevel = 6;
+        textureAnisoLevelSetting = 6;
     }
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 7")]
     static void ToggleTextureAnisoLevel_7()
     {
-        textureAnisoLevel = 7;
+        textureAnisoLevelSetting = 7;
     }
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 8")]
     static void ToggleTextureAnisoLevel_8()
     {
-        textureAnisoLevel = 8;
+        textureAnisoLevelSetting = 8;
     }
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 9")]
     static void ToggleTextureAnisoLevel_9()
     {
-        textureAnisoLevel = 9;
+        textureAnisoLevelSetting = 9;
     }
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 10")]
     static void ToggleTextureAnisoLevel_10()
     {
-        textureAnisoLevel = 10;
+        textureAnisoLevelSetting = 10;
     }
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 11")]
     static void ToggleTextureAnisoLevel_11()
     {
-        textureAnisoLevel = 11;
+        textureAnisoLevelSetting = 11;
     }
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 12")]
     static void ToggleTextureAnisoLevel_12()
     {
-        textureAnisoLevel = 12;
+        textureAnisoLevelSetting = 12;
     }
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 13")]
     static void ToggleTextureAnisoLevel_13()
     {
-        textureAnisoLevel = 13;
+        textureAnisoLevelSetting = 13;
     }
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 14")]
     static void ToggleTextureAnisoLevel_14()
     {
-        textureAnisoLevel = 14;
+        textureAnisoLevelSetting = 14;
     }
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 15")]
     static void ToggleTextureAnisoLevel_15()
     {
-        textureAnisoLevel = 15;
+        textureAnisoLevelSetting = 15;
     }
 
     [MenuItem("Manual Texture Controls/Set Texture Aniso Level/Level 16")]
     static void ToggleTextureAnisoLevel_16()
     {
-        textureAnisoLevel = 16;
-    }
-
-    // ----------------------------------------------------------------------------
-    // Below are Menu Controls for texture compression quality, made into static toggles that can be triggered.
-    // Adding a menu item is simple as copying and pasting one and changing the menu item variable, method name and the settings value.
-
-    [MenuItem("Manual Texture Controls/Set Texture Compression Quality/Normal")]
-    static void ToggleCompressionQuality_Normal()
-    {
-        textureCompressionQuality = TextureCompressionQuality.Normal;
-    }
-
-    [MenuItem("Manual Texture Controls/Set Texture Compression Quality/Best")]
-    static void ToggleCompressionQuality_Best()
-    {
-        textureCompressionQuality = TextureCompressionQuality.Best;
-    }
-
-    [MenuItem("Manual Texture Controls/Set Texture Compression Quality/Fast")]
-    static void ToggleCompressionQuality_Fast()
-    {
-        textureCompressionQuality = TextureCompressionQuality.Fast;
+        textureAnisoLevelSetting = 16;
     }
 
     // ----------------------------------------------------------------------------
@@ -425,6 +403,34 @@ public class TextureConfigurationFile : ScriptableObject
     static void ToggleAlphaSplitting_Enable()
     {
         textureAlphaSplittingSetting = true;
+    }
+
+    // ----------------------------------------------------------------------------
+    // Below are Menu Controls for texture alpha splitting, made into static toggles that can be triggered.
+    // Adding a menu item is simple as copying and pasting one and changing the menu item variable, method name and the settings value.
+
+    [MenuItem("Manual Texture Controls/Set Texture Compression Type/Uncompressed")]
+    static void ToggleTextureCompressionType_Uncompressed()
+    {
+        textureCompressionTypeSetting = TextureImporterCompression.Uncompressed;
+    }
+
+    [MenuItem("Manual Texture Controls/Set Texture Compression Type/Compressed")]
+    static void ToggleTextureCompressionType_Compressed()
+    {
+        textureCompressionTypeSetting = TextureImporterCompression.Compressed;
+    }
+
+    [MenuItem("Manual Texture Controls/Set Texture Compression Type/Compressed LQ")]
+    static void ToggleTextureCompressionType_CompressedLQ()
+    {
+        textureCompressionTypeSetting = TextureImporterCompression.CompressedLQ;
+    }
+
+    [MenuItem("Manual Texture Controls/Set Texture Compression Type/Compressed HQ")]
+    static void ToggleTextureCompressionType_CompressedHQ()
+    {
+        textureCompressionTypeSetting = TextureImporterCompression.CompressedHQ;
     }
 
     // ----------------------------------------------------------------------------
@@ -510,12 +516,12 @@ public class TextureConfigurationFile : ScriptableObject
     [MenuItem("Manual Texture Controls/Apply Selected Settings")]
     static public void ToggleApplySettings()
     {
-        ApplySettings(textureMaxSizeSetting, textureAnisoLevel, platformOverrideSetting);
+        ApplySettings(textureMaxSizeSetting, textureAnisoLevelSetting, textureAlphaSplittingSetting, textureCompressionTypeSetting , platformOverrideSetting);
     }
 
     // Apply settings Method which searches and adds all texture files in an array, and for each file, adds the settings, overrides it for the selected platform
     // and imports the newly applied asset again, therefore applying all the settings properly.
-    static void ApplySettings(int maxSize, int anisoLevel,string platform)
+    static void ApplySettings(int maxSize, int anisoLevel, bool alphaSplitting, TextureImporterCompression compressionType , string platform)
     {
         Object[] textures = GetSelectedTextures();
         Selection.objects = new Object[0];
@@ -527,6 +533,8 @@ public class TextureConfigurationFile : ScriptableObject
             texturesettings.maxTextureSize = maxSize;
             texturesettings.name = platform;
             texturesettings.overridden = true;
+            texturesettings.textureCompression = compressionType;
+            texturesettings.allowsAlphaSplitting = alphaSplitting;
             textureImporter.anisoLevel = anisoLevel;
             textureImporter.SetPlatformTextureSettings(texturesettings);
             AssetDatabase.ImportAsset(path);
@@ -575,7 +583,7 @@ public class AutomaticImport : AssetPostprocessor
             texturesettings.maxTextureSize = TextureConfigurationFile.textureMaxSizeSetting;
             texturesettings.name = TextureConfigurationFile.platformOverrideSetting;
             texturesettings.overridden = true;
-            textureImporter.anisoLevel = TextureConfigurationFile.textureAnisoLevel;
+            textureImporter.anisoLevel = TextureConfigurationFile.textureAnisoLevelSetting;
             textureImporter.SetPlatformTextureSettings(texturesettings);
             textureImporter.SaveAndReimport();
         }
