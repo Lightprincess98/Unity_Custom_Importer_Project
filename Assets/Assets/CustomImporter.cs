@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+#region Scriptable Object Configuration Files
 public class AudioConfigruationFile : ScriptableObject
 {
     // Audio Settings Variables to store the changed settings
@@ -10,6 +11,7 @@ public class AudioConfigruationFile : ScriptableObject
     public static AudioClipLoadType clipLoadTypeSetting { get; set; } = AudioClipLoadType.DecompressOnLoad;
     public static string platformOverrideSetting { get; set; } = "Standalone";
 
+    #region Menu Items
     // Below are Menu Controls for sample rate settings, made into static toggles that can be triggered.
     // Adding a menu item is simple as copying and pasting one and changing the menu item variable, method name and the settings value.
     [MenuItem("Manual Audio Controls/Set Sample Rate Setting/8,000 Hz")]
@@ -194,6 +196,8 @@ public class AudioConfigruationFile : ScriptableObject
         ApplySettings(clipSampleRateSetting, clipCompressionFormatSetting, clipLoadTypeSetting, platformOverrideSetting);
     }
 
+    #endregion
+
     // Apply settings Method which searches and adds all audio clips in an array, and for each clip, adds the settings, overrides it for the selected platform
     // and imports the newly applied asset again, therefore applying all the settings properly.
     static void ApplySettings(uint sampleRate, AudioCompressionFormat format, AudioClipLoadType loadType, string platform)
@@ -232,6 +236,7 @@ public class TextureConfigurationFile : ScriptableObject
     public static bool textureAlphaSplittingSetting = false;
     public static TextureImporterCompression textureCompressionTypeSetting { get; set; } = TextureImporterCompression.Uncompressed;
 
+    #region Menu Items
     // Below are Menu Controls for texture size settings, made into static toggles that can be triggered.
     // Adding a menu item is simple as copying and pasting one and changing the menu item variable, method name and the settings value.
 
@@ -519,6 +524,8 @@ public class TextureConfigurationFile : ScriptableObject
         ApplySettings(textureMaxSizeSetting, textureAnisoLevelSetting, textureAlphaSplittingSetting, textureCompressionTypeSetting , platformOverrideSetting);
     }
 
+    #endregion
+
     // Apply settings Method which searches and adds all texture files in an array, and for each file, adds the settings, overrides it for the selected platform
     // and imports the newly applied asset again, therefore applying all the settings properly.
     static void ApplySettings(int maxSize, int anisoLevel, bool alphaSplitting, TextureImporterCompression compressionType , string platform)
@@ -548,7 +555,9 @@ public class TextureConfigurationFile : ScriptableObject
         return Selection.GetFiltered(typeof(Texture), SelectionMode.DeepAssets);
     }
 }
+#endregion
 
+#region Asset Postprocessor Class
 //Class for handling Automatic importing for Audio and Textures
 public class AutomaticImport : AssetPostprocessor
 {   
@@ -589,3 +598,4 @@ public class AutomaticImport : AssetPostprocessor
         }
     }
 }
+#endregion
